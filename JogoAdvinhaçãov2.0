@@ -1,0 +1,72 @@
+import random
+import time
+
+print('====================================')
+print(' Jogo da Advinhação Alura com Laços ')
+print('====================================')
+
+#Tempo de Loading...
+t = 1 #Um Segundo no caso!
+
+class Jogada():
+    def Jogo():
+        print('Escolha o nível de Díficuldade ')
+        print(' (1) Fácil (2) Médio (3) Difícil')
+        nivel = int(input('Digite: '))
+
+        if (nivel==1):
+            tentativas = 20
+            rodadas_totais = 20
+        elif (nivel==2):
+            tentativas = 10
+            rodadas_totais = 10
+        else:
+            tentativas = 5
+            rodadas_totais = 5
+            
+        # Numero Secreto Gerado pelo Random
+        numero_sorteado = random.randrange(1,100) 
+        
+        for tentativa in range (1, tentativas + 1):
+            print(f'Tentativa Número {tentativa} de {rodadas_totais}')
+            chute = int(input('Digite o Numero:'))
+
+            if (chute < 1 or chute > 100):
+                print('\n\n\n\nValor Inválido!\n')
+                continue
+
+            elif (chute==numero_sorteado):
+                if (tentativa == 1):
+                    print('\nVocê Acertou!! Pontuação Máxima! 1000')
+                    time.sleep(t)
+                    exit('Obrigado por Jogar!')
+                elif(rodadas_totais==20):
+                    pontos = 1000 - (tentativa * 50)
+                    print(f'\nParabéns você Acertou, a Sua Pontuação foi de: {pontos}')
+                    time.sleep(t)
+                    exit('Obrigado por Jogar')
+                elif(rodadas_totais == 10):
+                    pontos = 1000 - (tentativa * 100)
+                    print(f'\nParabéns você Acertou, a Sua Pontuação foi de: {pontos}')
+                    time.sleep(t)
+                    exit('Obrigado por Jogar')
+                else:
+                    pontos = 1000 - (tentativa * 150)
+                    print(f'\nParabéns você Acertou, a Sua Pontuação foi de: {pontos}')
+                    time.sleep(t)
+                    exit('Obrigado por Jogar')
+
+            elif (tentativa == rodadas_totais ):
+                exit('Suas tentativas acabaram, Fim de Jogo!')
+
+            elif (chute<numero_sorteado):
+                print('Você errou! Seu chute foi menor!\n')
+
+            elif (chute>numero_sorteado):
+                print('Você errou! Seu chute foi maior!\n')
+
+            tentativa = tentativa + tentativa
+
+        print('\nAcabou as Tentativas!')
+
+Jogada.Jogo()
